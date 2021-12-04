@@ -36,9 +36,7 @@ void Run_Sorting_Algorithms(int ARRSIZE){
 
 
 
-    /*** COMMENTING OUT WORKING SORTING ALGORITHMS
-
-    /*** INSERTION SORT STUFF
+    /*** INSERTION SORT STUFF   ***/
     int insertionArr[ARRSIZE];          // Copy Array
     for(int x = 0; x <= ARRSIZE; x++){
         insertionArr[x] = intArr[x];
@@ -46,7 +44,9 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     }
     insertionsort(insertionArr, ARRSIZE);
 
-    /***    SELECTION SORT STUFF
+
+
+    /***    SELECTION SORT STUFF    ***/
     int selectionArr[ARRSIZE];          // Copy Array
     for(int x = 0; x <= ARRSIZE; x++){
         selectionArr[x] = intArr[x];
@@ -54,14 +54,13 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     selectionSort(selectionArr, ARRSIZE);
 
     /***    BUBBLE SORT STUFF   ***/
-    /*
     int bubbleArr[ARRSIZE];
     for(int x = 0; x <= ARRSIZE; x++){
         bubbleArr[x] = intArr[x];
     }
     bubbleSort(bubbleArr, ARRSIZE);
 
-    */
+
 
     /***    MERGE SORT STUFF    ***/
     int mergeArr[ARRSIZE];
@@ -74,7 +73,8 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     time_t end = clock();
 
     double runtime = Calculate_Runtime(end, start);
-    printf("\nMerge Sort completed:\t%f seconds\n", runtime);
+    printf("Merge Sort completed:\t%f seconds\n", runtime);
+
 
 
     /***    QUICK SORT STUFF    ***/
@@ -88,16 +88,7 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     end = clock();
     
     runtime = Calculate_Runtime(end, start);
-    printf("\nQuick Sort completed:\t%f seconds\n", runtime);
-
-
-    /***    Counting SORT STUFF     ***/
-    int countArr[ARRSIZE];
-    for(int x = 0; x <= ARRSIZE; x++){
-        countArr[x] = intArr[x];
-    }
-
-    // countingSort();
+    printf("Quick Sort completed:\t%f seconds\n", runtime);
 }
 
 
@@ -127,7 +118,7 @@ void insertionsort(int insertionArr[], int ARRSIZE){
     // printArr(insertionArr, ARRSIZE);     // Prints the array
 
     double runtime = Calculate_Runtime(end, start);
-    printf("\nInsertion Sort completed:\t%f seconds\n", runtime);
+    printf("Insertion Sort completed:\t%f seconds\n", runtime);
 }
 
 
@@ -155,7 +146,7 @@ void selectionSort(int selectionArr[], int ARRSIZE){
     //printArr(selectionArr, ARRSIZE);     // Prints the array
 
     double runtime = Calculate_Runtime(end, start);
-    printf("\nSelection Sort completed:\t%f seconds\n", runtime);
+    printf("Selection Sort completed:\t%f seconds\n", runtime);
 }
 
 
@@ -183,7 +174,7 @@ void bubbleSort(int bubbleArr[], int ARRSIZE){
     //printArr(bubbleArr, ARRSIZE);
 
     double runtime = Calculate_Runtime(end, start);
-    printf("\nBubble Sort completed:\t\t%f seconds\n", runtime);
+    printf("Bubble Sort completed:\t\t%f seconds\n", runtime);
 }
 
 
