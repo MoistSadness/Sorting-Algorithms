@@ -68,11 +68,10 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     for(int x = 0; x <= ARRSIZE; x++){
         mergeArr[x] = intArr[x];
     }
+
     time_t start = clock();                             // Benchmarking done in driver code because
     mergeSort(mergeArr, 0, ARRSIZE - 1);                // sorting algorithm is recursive
     time_t end = clock();
-
-    // printArr(mergeArr, ARRSIZE);
 
     double runtime = Calculate_Runtime(end, start);
     printf("\nMerge Sort completed:\t%f seconds\n", runtime);
@@ -83,7 +82,22 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     for(int x = 0; x <= ARRSIZE; x++){
         quickArr[x] = intArr[x];
     }
-    quickSort(quickArr, 0, ARRSIZE)
+
+    start = clock();
+    quickSort(quickArr, 0, ARRSIZE);
+    end = clock();
+    
+    runtime = Calculate_Runtime(end, start);
+    printf("\nQuick Sort completed:\t%f seconds\n", runtime);
+
+
+    /***    Counting SORT STUFF     ***/
+    int countArr[ARRSIZE];
+    for(int x = 0; x <= ARRSIZE; x++){
+        countArr[x] = intArr[x];
+    }
+
+    // countingSort();
 }
 
 
@@ -227,8 +241,6 @@ void merge(int mergeSubArr[], int left, int middle, int right){
 }
 
 void mergeSort(int mergeArr[], int leftIndex, int rightIndex){
-    printf("begin mergesort\n");
-
     if (leftIndex >= rightIndex) return;        // End recursion
 
     // Accounts for overflow in case the mergeArr has an odd number of elements
@@ -259,10 +271,15 @@ int partition(int quickArr[], int left, int right){
             pivotIndex++;
 
             // Swaping
-            int temp;
-            
+            int temp = quickArr[pivotIndex];
+            quickArr[pivotIndex] = quickArr[j];
+            quickArr[j] = temp;
         }
     }
+    int temp = quickArr[pivotIndex + 1];
+    quickArr[pivotIndex + 1] = quickArr[right];
+    quickArr[right] = temp;
+    return pivotIndex + 1;
 }
 
 void quickSort(int quickArr[], int left, int right){
@@ -278,4 +295,18 @@ void quickSort(int quickArr[], int left, int right){
 /****
  * Counting Sort
 ****/
+/*
+void countingSort(int countArr[], int ARRSIZE){
+    // Finding the largest value in the dataset
+    int counter = 0;
+    for (int i = 0; i < ARRSIZE; i++){
+        if (countArr[i] > counter) counter = counter;
+    }
 
+    // Creating hash array and filling it with 0's
+    int indexArr[ARRSIZE];
+    for (int i = 0; i < ARRSIZE; i++){
+        indexArr[i] = 0;
+    }
+}
+*/

@@ -29,4 +29,6 @@ void mergeSort(int mergeArr[], int leftIndex, int rightIndex);
 int partition(int quickArr[], int left, int right);
 void quickSort(int quickArr[], int left, int right);
 
+//void countingSort(int countArr[], int ARRSIZE);
+
 #endif
