@@ -23,6 +23,10 @@ void insertionsort(int insertionArr[], int ARRSIZE);
 void selectionSort(int selectionArr[], int ARRSIZE);
 void bubbleSort(int bubbleArr[], int arrSize);
 
+void merge(int mergeSubArr[], int left, int middle, int right);
+void mergeSort(int mergeArr[], int leftIndex, int rightIndex);
 
+int partition(int quickArr[], int left, int right);
+void quickSort(int quickArr[], int left, int right);
 
 #endif

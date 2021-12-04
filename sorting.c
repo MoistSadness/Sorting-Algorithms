@@ -34,7 +34,11 @@ void Run_Sorting_Algorithms(int ARRSIZE){
         // printf("%d\t%d\n", x, intArr[x]);
     }
 
-    // Insetion sort stuff
+
+
+    /*** COMMENTING OUT WORKING SORTING ALGORITHMS
+
+    /*** INSERTION SORT STUFF
     int insertionArr[ARRSIZE];          // Copy Array
     for(int x = 0; x <= ARRSIZE; x++){
         insertionArr[x] = intArr[x];
@@ -42,19 +46,44 @@ void Run_Sorting_Algorithms(int ARRSIZE){
     }
     insertionsort(insertionArr, ARRSIZE);
 
-    // Selection sort stuff
+    /***    SELECTION SORT STUFF
     int selectionArr[ARRSIZE];          // Copy Array
     for(int x = 0; x <= ARRSIZE; x++){
         selectionArr[x] = intArr[x];
     }
     selectionSort(selectionArr, ARRSIZE);
 
-    // Bubble sort stuff
+    /***    BUBBLE SORT STUFF   ***/
+    /*
     int bubbleArr[ARRSIZE];
     for(int x = 0; x <= ARRSIZE; x++){
         bubbleArr[x] = intArr[x];
     }
     bubbleSort(bubbleArr, ARRSIZE);
+
+    */
+
+    /***    MERGE SORT STUFF    ***/
+    int mergeArr[ARRSIZE];
+    for(int x = 0; x <= ARRSIZE; x++){
+        mergeArr[x] = intArr[x];
+    }
+    time_t start = clock();                             // Benchmarking done in driver code because
+    mergeSort(mergeArr, 0, ARRSIZE - 1);                // sorting algorithm is recursive
+    time_t end = clock();
+
+    // printArr(mergeArr, ARRSIZE);
+
+    double runtime = Calculate_Runtime(end, start);
+    printf("\nMerge Sort completed:\t%f seconds\n", runtime);
+
+
+    /***    QUICK SORT STUFF    ***/
+    int quickArr[ARRSIZE];
+    for(int x = 0; x <= ARRSIZE; x++){
+        quickArr[x] = intArr[x];
+    }
+    quickSort(quickArr, 0, ARRSIZE)
 }
 
 
@@ -147,20 +176,106 @@ void bubbleSort(int bubbleArr[], int ARRSIZE){
 /****
  * Merge Sort
 ****/
+void merge(int mergeSubArr[], int left, int middle, int right){
+    int tempLeftSize = middle - left + 1;       // Size of the left sub array
+    int tempRightSize = right - middle;         // Size of the right sub array
+
+    int tempLeftArr[tempLeftSize], tempRightArr[tempRightSize];         // Creating Sub arrays
+
+    // Copying data from mergeSubArr and splitting it into the two sub arrays
+    for (int i = 0; i < tempLeftSize; i++){
+        tempLeftArr[i] = mergeSubArr[left + i];
+        }
+    for (int j = 0; j < tempRightSize; j++){
+        tempRightArr[j] = mergeSubArr[middle + 1 + j];
+        }
+
+    // Sorting and then merging the two temp arrays back into the original mergeSubArr
+    int tempLeftInit = 0;            // Initial index of left subarray
+    int tempRightInit = 0;           // Initial index of right subarray
+    int mergeArrInit = left;         // Initial index of the merged subarray
+
+    /***
+     * Compare the elements between the temp subarrays at a specific index against each other
+     * The smallest one gets added into the original aray and its index incremented
+     * The larger one is left unchanged
+     * Increment the main counter 
+    ***/
+    while (tempLeftInit < tempLeftSize && tempRightInit < tempRightSize){
+       if (tempLeftArr[tempLeftInit] < tempRightArr[tempRightInit]) {
+           mergeSubArr[mergeArrInit] = tempLeftArr[tempLeftInit];
+           tempLeftInit++;
+       }
+       else {
+           mergeSubArr[mergeArrInit] = tempRightArr[tempRightInit];
+           tempRightInit++;
+       }
+        mergeArrInit++;
+   }
+
+   // Copy any leftover elements from the subarrays into the original 
+   while (tempLeftInit < tempLeftSize) {
+       mergeSubArr[mergeArrInit] = tempLeftArr[tempLeftInit];
+       tempLeftInit++;
+       mergeArrInit++;
+   }
+   while (tempRightInit < tempRightSize) {
+       mergeSubArr[mergeArrInit] = tempRightArr[tempRightInit];
+       tempRightInit++;
+       mergeArrInit++;
+   }
+}
+
+void mergeSort(int mergeArr[], int leftIndex, int rightIndex){
+    printf("begin mergesort\n");
+
+    if (leftIndex >= rightIndex) return;        // End recursion
+
+    // Accounts for overflow in case the mergeArr has an odd number of elements
+    int middleIndex = (leftIndex + rightIndex) /2;
+
+    // Sort the left side subArray
+    mergeSort(mergeArr, leftIndex, middleIndex);
+
+    // Sort the right side subArray
+    mergeSort(mergeArr, middleIndex + 1, rightIndex);
+
+    // Merge the two subarrays together
+    merge(mergeArr, leftIndex, middleIndex, rightIndex);
+}
 
 
 /****
  * Quick Sort
 ****/
+int partition(int quickArr[], int left, int right){
+    int pivot = quickArr[right];
+    int pivotIndex = (left -1);
 
+    for (int j = left; j <= right - 1; j++){
+        // If the current element is smaller than the pivot, increment index of smaller element
+        // and swap the two elements
+        if (quickArr[j] < pivot){
+            pivotIndex++;
+
+            // Swaping
+            int temp;
+            
+        }
+    }
+}
+
+void quickSort(int quickArr[], int left, int right){
+    if (left < right){
+        int partitionIndex = partition(quickArr, left, right);
+
+        quickSort(quickArr, left, partitionIndex - 1);      // Separately sort elements before 
+        quickSort(quickArr, partitionIndex + 1, right);     // partition and after partition
+    }
+
+}
 
 /****
  * Counting Sort
 ****/
-
-
-/****
- * Merge Sort
-****/
-
 
